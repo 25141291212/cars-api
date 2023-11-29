@@ -11,8 +11,10 @@ class Car extends Model
 {
     use HasFactory;
 
+    const FIELD_COLOR_ID = 'color_id';
+
     /**
      * @var array
      */
-    protected $fillable = ['make', 'model', 'build_date'];
+    protected $fillable = ['make', 'model', 'build_date', 'color_id'];
 }

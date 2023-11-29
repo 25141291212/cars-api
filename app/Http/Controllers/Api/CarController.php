@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Car;
+use App\Models\CarColor;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use RuntimeException;
@@ -56,6 +57,10 @@ class CarController extends Controller
 
         try {    
             $validated = $request->validate(self::validationRules());
+    
+            $carColor = new CarColor();
+
+            $validated[Car::FIELD_COLOR_ID] = $carColor->retrieveColorId($validated['color']);
 
             $car = Car::create($validated);
     
@@ -79,6 +84,10 @@ class CarController extends Controller
 
         try {    
             $validated = $request->validate(self::validationRules());
+    
+            $carColor = new CarColor();
+
+            $validated[Car::FIELD_COLOR_ID] = $carColor->retrieveColorId($validated['color']);
     
             $car = Car::findOrFail($id);
     
